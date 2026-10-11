@@ -848,6 +848,9 @@ object InuConfig {
     @JvmField
     val EXTRA_DEBUG_LOGS = BoolItem("extra_debug_logs", false, exportable = false)
 
+    @JvmField
+    val FIX_STICKER_PACK_EDIT = BoolItem("fix_sticker_pack_edit", true)
+
     // internal state
     @JvmField
     val VOICE_HINT_SHOWN = BoolItem("voice_hint_shown", false, exportable = false)
