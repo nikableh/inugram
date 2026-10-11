@@ -903,6 +903,9 @@ object InuConfig {
     @JvmField
     val EXTRA_DEBUG_LOGS = BoolItem("extra_debug_logs", false, exportable = false)
 
+    @JvmField
+    val FIX_PROFILE_POST_BUTTON_FLICKER = BoolItem("fix_profile_post_button_flicker", true)
+
     // internal state
     @JvmField
     val VOICE_HINT_SHOWN = BoolItem("voice_hint_shown", false, exportable = false)

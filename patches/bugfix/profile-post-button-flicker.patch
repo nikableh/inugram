@@ -1,0 +1,33 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Nika Krasnova <nika@nikableh.moe>
+Date: Sun, 11 Oct 2026 14:50:45 +0200
+Subject: Prevent Add post from flashing when opening your profile
+
+---
+ .../src/main/java/org/telegram/ui/ProfileActivity.java      | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
+
+diff --git a/TMessagesProj/src/main/java/org/telegram/ui/ProfileActivity.java b/TMessagesProj/src/main/java/org/telegram/ui/ProfileActivity.java
+index 0000000..0000000 100644
+--- a/TMessagesProj/src/main/java/org/telegram/ui/ProfileActivity.java
++++ b/TMessagesProj/src/main/java/org/telegram/ui/ProfileActivity.java
+@@ -3525,6 +3525,9 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
+ 
+         if (myProfile) {
+             bottomButtonsContainer = new FrameLayout(context);
++            if (desu.inugram.InuConfig.FIX_PROFILE_POST_BUTTON_FLICKER.getValue()) {
++                bottomButtonsContainer.setVisibility(View.INVISIBLE);
++            }
+ 
+             bottomButtonContainer = new FrameLayout[2];
+             bottomButton = new ButtonWithCounterView[2];
+@@ -6128,7 +6131,8 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
+         } else {
+             buttonsTranslationY = dp(72);
+         }
+-        animatorBottomButtonVisibility.setValue(buttonsTranslationY <= 0, true);
++        animatorBottomButtonVisibility.setValue(buttonsTranslationY <= 0,
++                !desu.inugram.InuConfig.FIX_PROFILE_POST_BUTTON_FLICKER.getValue() || bottomButtonsContainer.isLaidOut());
+ 
+         final float factor = animatorBottomButtonVisibility.getFloatValue();
+         bottomButtonsContainer.setTranslationY(lerp(dp(60), 0, factor));

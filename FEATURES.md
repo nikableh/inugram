@@ -331,6 +331,7 @@ most things are toggleable in `Settings → Inugram`, with sensible opinionated 
 - nav stack lockup after rapid back swipes
 - click-through area to the left/right of bottom bar tabs
 - profile scroll jump when opening uncached user
+- "Add post" button no longer flashes when opening your profile before the Posts section is visible
 - duplicate edit-info and profile-photo actions in the standalone self-profile overflow menu
 - stale unread badges on global-search top peers
 - stale unread mention pointer after reading mention on another device (mention button jumping to old message)
