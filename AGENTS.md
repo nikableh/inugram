@@ -46,6 +46,8 @@ Explicit user instructions override these defaults.
   `stg show` are allowed. Never run `stg export`; the user exports with
   `pnpm run export`. Authorized stock-history queries run inside `worktree/`.
 - No LSP. Verify Android compilation with `pnpm run build-debug`, sparingly.
+- Use `pnpm exec tsx scripts/gradle.ts <tasks>` for direct Gradle tasks across
+  platforms; add `--pluginless` before the tasks for `worktree-pluginless/`.
 - Never install, launch, or uninstall the app. Builds and read-only device
   operations are allowed; deployment and device testing are the user's call.
 - Gate behavior changes with `InuConfig`: default off must behave like stock.
@@ -140,6 +142,9 @@ If a refresh goes wrong, stop and ask the user instead of undoing it.
   for float-only overloads, including six-argument `createLinear`.
 
 ## Plugin engine
+
+Build the native engine with the Rust version pinned in `src/native/rust-toolchain.toml`.
+Its minimum version in `Cargo.toml` must retain the AArch64 foreign-boolean ABI fix.
 
 `sdk/types/common.d.ts` is the contract; fix code or contract when they disagree. The Rust
 engine is `src/native` (`api`, `jni`, grants/limits in `sandbox`, promise machinery in

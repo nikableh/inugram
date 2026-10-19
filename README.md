@@ -89,6 +89,19 @@ It also works with `--ci` and `--no-submodules`. Build it with `pnpm run build-d
 The plain build excludes the plugin engine, native hooking libraries, plugin screens, and plugin test assets.
 Other scripts continue to target `worktree/`.
 
+`pnpm run build-debug` and `pnpm run build-debug-pluginless` also work in
+Windows shells. On Windows, the launcher uses `JAVA_HOME`, Android Studio's
+per-worktree Gradle JDK (`.gradle/config.properties`), or `java.exe` on `PATH`,
+in that order. For other Gradle tasks, use `pnpm exec tsx scripts/gradle.ts
+<tasks>`; put `--pluginless` before the tasks to select `worktree-pluginless/`.
+
+The native engine pins Rust in `src/native/rust-toolchain.toml`. To install it
+explicitly, run `rustup toolchain install` from `src/native`. Current MSRV
+1.99.1 includes the fix for Rust's AArch64 foreign-boolean ABI bug
+([rust-lang/rust#159244](https://github.com/rust-lang/rust/issues/159244)),
+which could misread JNI exception checks under ARM translation and abort the
+app.
+
 Setup writes the checkout's build variant to the ignored `inu-build.properties` file.
 Gradle exposes it as `BuildConfig.INU_PLUGINLESS` in both Android modules.
 

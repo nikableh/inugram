@@ -61,7 +61,7 @@ const checks = await parallelMap(
       fs.readFile(join(patchesDir, entry), 'utf8'),
       generateStablePatchFromCommit(worktreeDir, commitId),
     ])
-    return { kind: actual === stable ? 'ok' : 'drift', entry, patchName }
+    return { kind: actual.replaceAll('\r\n', '\n') === stable ? 'ok' : 'drift', entry, patchName }
   },
 )
 
